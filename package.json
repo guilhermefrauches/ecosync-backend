@@ -1,0 +1,53 @@
+{
+  "name": "ecosync-backend",
+  "version": "0.1.0",
+  "description": "BFF do EcoSync (smart home / gestão de energia) - ExpoTech 2026.2",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main.js",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "oxlint --type-aware src/",
+    "typeorm": "node --env-file-if-exists=.env node_modules/typeorm/cli.js -d dist/config/data-source.js",
+    "migration:generate": "npm run build && npm run typeorm -- migration:generate -p",
+    "migration:check": "npm run build && npm run typeorm -- migration:generate --check src/migrations/Verificacao",
+    "migration:run": "npm run build && npm run typeorm -- migration:run",
+    "migration:revert": "npm run build && npm run typeorm -- migration:revert",
+    "seed": "npm run build && node --env-file-if-exists=.env dist/database/seed.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^12.3.3",
+    "@nestjs/config": "^12.1.0",
+    "@nestjs/core": "^12.3.3",
+    "@nestjs/jwt": "^12.0.3",
+    "@nestjs/platform-express": "^12.3.3",
+    "@nestjs/throttler": "^6.7.1",
+    "@nestjs/typeorm": "^12.0.2",
+    "argon2": "^0.45.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "cookie-parser": "^1.4.7",
+    "pg": "^8.23.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typeorm": "^1.1.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^12.0.11",
+    "@nestjs/schematics": "^12.0.12",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.5",
+    "oxlint": "^1.91.0",
+    "oxlint-tsgolint": "^7.0.2005",
+    "prettier": "^3.9.10",
+    "typescript": "^6.0.3"
+  }
+}
